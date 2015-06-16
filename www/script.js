@@ -25,7 +25,7 @@ trak.config(function($routeProvider) {
 
 trak.controller('mainController', function($scope) {
 
-	$scope.message = "If you are in a hurry just jump right over and take a look at some of my ";
+	$scope.message = "Thanks for stopping by";
 });
 
 trak.controller('aboutController', function($scope) {
@@ -36,7 +36,8 @@ trak.controller('aboutController', function($scope) {
 trak.controller('contactController', function($scope, $location, toastr) {
 
 	$scope.message = "";
-	$scope.submitContact = function() {
+	$scope.submitContact = function(isValid) {
+		if (isValid) {
 		console.log("Name: " + $scope.contact.name)
 		console.log("Title: " + $scope.contact.title)
 		console.log("Comapny: " + $scope.contact.company)
@@ -47,9 +48,12 @@ trak.controller('contactController', function($scope, $location, toastr) {
 		$scope.contact = null;
 
 		toastr.success('Your information has been sent to Jacob!', "Success!");
+		} else {
+			toastr.error("There seems to be an error with the form. Give it another shot!", "Whoops")
+		}
 	}
 });
 
 trak.controller('workController', function($scope, $location) {
-	$scope.message = "This is all the work!"
+	$scope.message = "This is what I do"
 });
