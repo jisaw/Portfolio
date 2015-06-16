@@ -1,4 +1,4 @@
-var trak = angular.module('trak', ['ngRoute']);
+var trak = angular.module('trak', ['ngRoute', 'ngAnimate', 'toastr']);
 
 trak.config(function($routeProvider) {
 	$routeProvider
@@ -25,7 +25,7 @@ trak.config(function($routeProvider) {
 
 trak.controller('mainController', function($scope) {
 
-	$scope.message = "everyone come and see this";
+	$scope.message = "If you are in a hurry just jump right over and take a look at some of my ";
 });
 
 trak.controller('aboutController', function($scope) {
@@ -33,11 +33,23 @@ trak.controller('aboutController', function($scope) {
 	$scope.message = "This is the about page getting displayed!";
 });
 
-trak.controller('contactController', function($scope) {
+trak.controller('contactController', function($scope, $location, toastr) {
 
-	$scope.message = "Look how you can't contact me.";
+	$scope.message = "";
+	$scope.submitContact = function() {
+		console.log("Name: " + $scope.contact.name)
+		console.log("Title: " + $scope.contact.title)
+		console.log("Comapny: " + $scope.contact.company)
+		console.log("E-mail: " + $scope.contact.email)
+		console.log("Phone: " + $scope.contact.phone)
+		console.log("Message: " + $scope.contact.msg)
+
+		$scope.contact = null;
+
+		toastr.success('Your information has been sent to Jacob!', "Success!");
+	}
 });
 
-trak.controller('workController', function($scope) {
+trak.controller('workController', function($scope, $location) {
 	$scope.message = "This is all the work!"
 });

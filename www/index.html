@@ -11,13 +11,20 @@
       <!-- load angular and angular route via CDN -->
       <script type="text/javascript" src="angular/angular.min.js"></script>
       <script type="text/javascript" src="angular/angular-route.min.js"></script>
+      <script type="text/javascript" src="angular/angular-animate.min.js"></script>
+	  <script type="text/javascript" src="angular/angular-toastr.tpls.min.js"></script>
+
+      <link rel="stylesheet" type="text/css" href="angular/angular-toastr.min.css"/>
+
+
+
       <script src="script.js"></script>
     </head>
     <body ng-controller="mainController">
 
         <!-- HEADER AND NAVBAR -->
         <header>
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-inverse" style="margin-bottom: 0;">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="#/">Sawyer Portfolio</a>
@@ -32,14 +39,12 @@
             </div>
             </nav>
         </header>
-
         <!-- MAIN CONTENT AND INJECTED VIEWS -->
         <div id="main">
             <!-- angular templating -->
             <!-- this is where content will be injected -->
             <div ng-view></div>
-
         </div>
-        <footer>Created by Jacob Sawyer 6/16/2015</footer>
+        <footer style="position: absolute; text-align: center; bottom: 5; width: 100%;">Created by Jacob Sawyer 6/16/2015</footer>
     </body>
     </html>
