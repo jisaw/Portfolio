@@ -1,4 +1,4 @@
-var trak = angular.module('trak', ['ngRoute', 'ngAnimate', 'toastr']);
+var trak = angular.module('trak', ['ngRoute', 'ngAnimate', 'toastr', 'ui.mask']);
 
 trak.config(function($routeProvider) {
 	$routeProvider
