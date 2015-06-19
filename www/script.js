@@ -54,6 +54,7 @@ trak.controller('contactController', function($scope, $location, toastr) {
 	}
 });
 
-trak.controller('workController', function($scope, $location) {
+trak.controller('workController', function($scope, $http) {
 	$scope.message = "This is what I do"
+	$http.jsonp("http://localhost:8000/articles?callback=JSON_CALLBACK").success(function(response) {$scope.articles = response.records;});
 });

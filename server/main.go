@@ -10,6 +10,7 @@ import (
 	"log"
 	"time"
 	"strconv"
+	//"github.com/go-errors/errors"
 )
 
 type Article struct {
@@ -33,7 +34,7 @@ func initDb() gorp.DbMap {
 
 func checkErr(err error, msg string) {
 	if err != nil {
-		log.Fatalln(msg, err)
+		log.Fatalln(msg, err)//.(*errors.Error).ErrorStack())
 	}
 }
 
@@ -46,10 +47,10 @@ func ArticlesList(c *gin.Context) {
 	var articles []Article
 	_, err := dbmap.Select(&articles, "select * from articles order by article_id")
 	checkErr(err, "Select failed")
-	content := gin.H{}
-	for k, v := range articles {
-		content[strconv.Itoa(k)] =v
-	}
+	content := gin.H{"records": articles,}
+	//for k, v := range articles {
+	//	content[strconv.Itoa(k)] =v
+	//}
 	c.JSON(200, content)
 }
 
@@ -98,10 +99,13 @@ func getArticle(article_id int) Article {
 }
 
 func main() {
+	defer dbmap.Db.Close()
+
 	app := gin.Default()
 	app.GET("/", index)
 	app.GET("/articles", ArticlesList)
 	app.POST("/articles", ArticlePost)
-	app.GET("/articles/:article_id", ArticlesDetail)
+	app.GET("/articles/:id", ArticlesDetail)
+
 	app.Run(":8000")
 }
