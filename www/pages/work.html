@@ -5,11 +5,11 @@
     </div>
 <div class="container">
 <div class="col-md-12">
-	<ul>
+	<ul style="list-style-type: none; margin: 0; padding: 0;">
 		<li ng-repeat="x in articles">
-		<div class="well well-lg">
+		<div class="well well-lg" style="white-space: pre;">
 			<h1>{{ x.Title }}</h1>
-			<p>{{x.Content}}</p>
+			<p ng-bind-html='toTrustedHtml(x.Content)'/>
 			</div>
 		</li>
 	</ul>
