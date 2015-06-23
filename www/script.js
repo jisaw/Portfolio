@@ -33,17 +33,28 @@ trak.controller('aboutController', function($scope) {
 	$scope.message = "This is the about page getting displayed!";
 });
 
-trak.controller('contactController', function($scope, $location, toastr) {
+trak.controller('contactController', function($scope, $http, $location, toastr) {
 
 	$scope.message = "";
 	$scope.submitContact = function(isValid) {
 		if (isValid) {
-		console.log("Name: " + $scope.contact.name)
-		console.log("Title: " + $scope.contact.title)
-		console.log("Comapny: " + $scope.contact.company)
-		console.log("E-mail: " + $scope.contact.email)
-		console.log("Phone: " + $scope.contact.phone)
-		console.log("Message: " + $scope.contact.msg)
+			$scope.formData = $.param({
+				"Name" :  $scope.contact.name,
+				"Title" :  $scope.contact.title,
+				"Company" :  $scope.contact.company,
+				"Email" :  $scope.contact.email,
+				"Phone" :  $scope.contact.phone,
+				"Message" :  $scope.contact.msg,
+	});
+
+		$http({
+			method : 'POST',
+			url : 'http://localhost:8000/contacts',
+			data : $scope.formData,
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' } 
+		}).success(function(data) {
+			console.log(data);
+		});
 
 		$scope.contact = null;
 
