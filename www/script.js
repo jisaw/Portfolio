@@ -30,7 +30,6 @@ trak.controller('mainController', function($scope) {
 
 trak.controller('aboutController', function($scope) {
 
-	$scope.message = "This is the about page getting displayed!";
 });
 
 trak.controller('contactController', function($scope, $http, $location, toastr) {
@@ -51,7 +50,7 @@ trak.controller('contactController', function($scope, $http, $location, toastr) 
 			method : 'POST',
 			url : 'http://localhost:8000/contacts',
 			data : $scope.formData,
-			headers : { 'Content-Type': 'application/x-www-form-urlencoded' } 
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).success(function(data) {
 			console.log(data);
 		});
@@ -66,9 +65,9 @@ trak.controller('contactController', function($scope, $http, $location, toastr) 
 });
 
 trak.controller('workController', function($scope, $http, $sce) {
-	$scope.message = "This is what I do"
+	$scope.message = "For business and pleasure"
 	$scope.toTrustedHtml = function(html) {
 		return $sce.trustAsHtml(html);
-	}
+	};
 	$http.get("http://localhost:8000/articles").success(function(response) {$scope.articles = response.records;});
 });

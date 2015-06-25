@@ -1,5 +1,5 @@
 <div class="jumbotron text-center">
-        <h1>Work Page</h1>
+        <h1>Projects</h1>
 
         <p>{{ message }}</p>
     </div>
@@ -7,7 +7,7 @@
 <div class="col-md-12">
 	<ul style="list-style-type: none; margin: 0; padding: 0;">
 		<li ng-repeat="x in articles">
-		<div class="well well-lg" style="white-space: pre;">
+		<div class="well well-lg" style="white-space: pre-wrap;">
 			<h1>{{ x.Title }}</h1>
 			<p ng-bind-html='toTrustedHtml(x.Content)'/>
 			</div>
