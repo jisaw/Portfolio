@@ -20,6 +20,10 @@ trak.config(function($routeProvider) {
 		.when('/work', {
 			templateUrl : 'pages/work.html',
 			controller : 'workController'
+		})
+		.when('/login', {
+			templateUrl : 'pages/login.html',
+			controller : 'loginController'
 		});
 });
 
@@ -71,3 +75,22 @@ trak.controller('workController', function($scope, $http, $sce) {
 	};
 	$http.get("http://localhost:8000/articles").success(function(response) {$scope.articles = response.records;});
 });
+
+trak.controller('loginController', function($scope, $http) {
+	$scope.message = "This is a login page test";
+	$scope.submitLogin = function() {
+			$scope.formData = $.param({
+				"Username" : $scope.login.username,
+				"Password" : $scope.login.password,
+			});
+
+			$http({
+				method : "POST",
+				url : 'http://localhost:8000/login',
+				data : $scope.formData,
+				headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+			}),success(function(data) {
+				//IF STATUS 200 LET PASS ELSE REJECT
+			});
+	};
+})

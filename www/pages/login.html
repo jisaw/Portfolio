@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+        <h1>Login</h1>
+
+        <p>{{ message }}</p>
+    </div>
+
+    <div class="container">
+      <div class="col-md-12 well well-lg">
+          <form name="loginForm" novalidate>
+              <div class="form-group">
+      			<label for="contactName">Username</label>
+      			<input type="text" class="form-control" id="contactName" placeholder="Username" ng-model="login.username" required>
+      		</div>
+              <div class="form-group">
+      			<label for="contactName">Password</label>
+      			<input type="text" class="form-control" id="contactName" placeholder="Password" ng-model="login.password" required>
+      		</div>
+
+              <button type="submit" ng-click="submitLogin()" class="btn btn-primary center-block" ng-disabled="contactForm.$invalid">Submit</button>
+          </form>
+      </div>
+    </div>
