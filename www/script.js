@@ -24,6 +24,10 @@ trak.config(function($routeProvider) {
 		.when('/login', {
 			templateUrl : 'pages/login.html',
 			controller : 'loginController'
+		})
+		.when('/admin', {
+			templateUrl : 'pages/admin.html',
+			controller : 'adminController'
 		});
 });
 
@@ -76,7 +80,7 @@ trak.controller('workController', function($scope, $http, $sce) {
 	$http.get("http://localhost:8000/articles").success(function(response) {$scope.articles = response.records;});
 });
 
-trak.controller('loginController', function($scope, $http) {
+trak.controller('loginController', function($scope, $http, $window, toastr) {
 	$scope.message = "This is a login page test";
 	$scope.submitLogin = function() {
 			$scope.formData = $.param({
@@ -89,8 +93,17 @@ trak.controller('loginController', function($scope, $http) {
 				url : 'http://localhost:8000/login',
 				data : $scope.formData,
 				headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-			}),success(function(data) {
-				//IF STATUS 200 LET PASS ELSE REJECT
+			}).success(function(data) {
+				if (data.result === "success") {
+					$window.location.href = '#admin';
+				}
+			})
+			.error(function() {
+				toastr.error('Incorrect Username or Password', 'Whoops');
 			});
 	};
+})
+
+trak.controller('adminController', function($scope) {
+	$scope.message = "Great Success"
 })
