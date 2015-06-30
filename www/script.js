@@ -28,6 +28,10 @@ trak.config(function($routeProvider) {
 		.when('/admin', {
 			templateUrl : 'pages/admin.html',
 			controller : 'adminController'
+		})
+		.when('/newArticle', {
+			templateUrl : 'pages/newArticle.html',
+			controller : 'newArticleController'
 		});
 });
 
@@ -105,5 +109,31 @@ trak.controller('loginController', function($scope, $http, $window, toastr) {
 })
 
 trak.controller('adminController', function($scope) {
+	$scope.message = "well that worked pretty cleanly";
+})
+
+trak.controller('newArticleController', function($scope, $http, toastr) {
 	$scope.message = "Great Success"
+
+	$scope.submitArticle = function() {
+		$scope.formData = $.param({
+			"Title" : $scope.article.title,
+			"Content" : $scope.article.content,
+		});
+
+		$http({
+			method : "POST",
+			url : 'http://localhost:8000/articles',
+			data : $scope.formData,
+			headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).success(function(data) {
+			if (data.result === "Success") {
+				toastr.success("Article submitted successfuly!", "Success!")
+			} else {
+				toastr.error("There seems to be an error with the form. Give it another shot!", "Whoops")
+			}
+		}).error(function(data) {
+			toastr.error("There seems to be an error with the form. Give it another shot!", "Whoops")
+		})
+	};
 })

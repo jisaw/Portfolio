@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+        <h1>Welcome!</h1>
+
+        <p>{{ message }}</p>
+    </div>
+
+<div class="container">
+    <div class="col-md-12 well well-lg">
+        <form name="createArticle">
+            <div class="form-group">
+    			<label for="articleTitle">Title</label><br/>
+    			<input type="text" class="article-control" id="articleTitle" placeholder="Title" ng-model="article.title" required>
+    		</div>
+            <div class="form-group">
+    			<label for="articleBody">Body</label><br/>
+    			<textarea form="createArticle" rows="8" cols="75" class="article-control" id="articleContent" placeholder="Body of the article goes here..." ng-model="article.content" >
+    			</textarea>
+    		</div>
+            <button type="submit" ng-click="submitArticle()" class="btn btn-primary center-block" ng-disabled="contactForm.$invalid">Submit</button>
+        </form>
+    </div>
+</div>
