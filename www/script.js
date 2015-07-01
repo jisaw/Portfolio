@@ -97,7 +97,6 @@ trak.controller('articleController', function($scope, $routeParams, $http, $sce)
 })
 
 trak.controller('loginController', function($scope, $http, $window, toastr) {
-	$scope.message = "This is a login page test";
 	$scope.submitLogin = function() {
 			$scope.formData = $.param({
 				"Username" : $scope.login.username,
@@ -120,11 +119,22 @@ trak.controller('loginController', function($scope, $http, $window, toastr) {
 	};
 })
 
-trak.controller('adminController', function($scope) {
+trak.controller('adminController', function($scope, $http, $window, toastr) {
 	$scope.message = "well that worked pretty cleanly";
+	$scope.toTrustedHtml = function(html) {
+		return $sce.trustAsHtml(html);
+	};
+	$http.get("http://localhost:8000/articles").success(function(response) {$scope.articles = response.records;});
+	$scope.deleteArticle = function(article_id) {
+		var result = confirm("Sure you want to delete?");
+		if (result){
+		$http.delete("http://localhost:8000/articles/" + article_id);
+		toastr.error("Deletion complete", "Deleted");
+	}
+	};
 })
 
-trak.controller('newArticleController', function($scope, $http, toastr) {
+trak.controller('newArticleController', function($scope, $http, $window, toastr) {
 	$scope.message = "Great Success"
 
 	$scope.submitArticle = function() {
@@ -141,6 +151,7 @@ trak.controller('newArticleController', function($scope, $http, toastr) {
 		}).success(function(data) {
 			if (data.result === "Success") {
 				toastr.success("Article submitted successfuly!", "Success!")
+				$window.location.reload();
 			} else {
 				toastr.error("There seems to be an error with the form. Give it another shot!", "Whoops")
 			}

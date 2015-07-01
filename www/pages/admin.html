@@ -2,9 +2,17 @@
         <h1>Welcome!</h1>
 
         <p>{{ message }}</p>
-        <a href="#newArticle"><button title="newArticle">New Article</button></a>
+        <a href="#newArticle"><button title="newArticle" class="btn btn-primary">New Article</button></a>
     </div>
 <div class="container">
     <div class="col-md-12">
+        <ul style="list-style-type: none; margin: 0; padding: 0;">
+    		<li ng-repeat="x in articles">
+    		<div class="well well-sm">
+    			<h4><a href="#work/{{x.Id}}">{{ x.Title }}</a><button class="btn btn-default pull-right" ng-click="deleteArticle(x.Id)"> <span class="fa fa-trash"></span> </button></h4>
+    			<!--<p ng-bind-html='toTrustedHtml(x.Content)'/>-->
+    			</div>
+    		</li>
+    	</ul>
     </div>
 </div>
