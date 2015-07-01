@@ -21,6 +21,10 @@ trak.config(function($routeProvider) {
 			templateUrl : 'pages/work.html',
 			controller : 'workController'
 		})
+		.when('/work/:article_id', {
+			templateUrl : 'pages/article.html',
+			controller : 'articleController'
+		})
 		.when('/login', {
 			templateUrl : 'pages/login.html',
 			controller : 'loginController'
@@ -83,6 +87,14 @@ trak.controller('workController', function($scope, $http, $sce) {
 	};
 	$http.get("http://localhost:8000/articles").success(function(response) {$scope.articles = response.records;});
 });
+
+trak.controller('articleController', function($scope, $routeParams, $http, $sce) {
+	$scope.article_id = $routeParams.article_id;
+	$scope.toTrustedHtml = function(html) {
+		return $sce.trustAsHtml(html);
+	};
+	$http.get("http://localhost:8000/articles/" + $scope.article_id).success(function(response) {$scope.article = response;});
+})
 
 trak.controller('loginController', function($scope, $http, $window, toastr) {
 	$scope.message = "This is a login page test";

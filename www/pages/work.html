@@ -8,12 +8,12 @@
 	<ul style="list-style-type: none; margin: 0; padding: 0;">
 		<li ng-repeat="x in articles">
 		<div class="well well-lg" style="white-space: pre-wrap;">
-			<h1>{{ x.Title }}</h1>
-			<p ng-bind-html='toTrustedHtml(x.Content)'/>
+			<h1><a href="#work/{{x.Id}}">{{ x.Title }}</a></h1>
+			<!--<p ng-bind-html='toTrustedHtml(x.Content)'/>-->
 			</div>
 		</li>
 	</ul>
-	 		
-    	
+
+
     </div>
 </div>
